@@ -127,11 +127,32 @@ Configured in HostBill *Server* (see `SharedLicense::$serverFieldsDescription`):
 
 - **Hostname** → API Base URL
 - **Username** → Bearer Token
+- **Input 1** → Request timeout (seconds)
+- **Input 2** → Connect timeout (seconds)
+- **Textarea** → Advanced API options (JSON)
 
 Notes:
 
 - Password/IP Address fields are not used.
 - Base URL is normalized (trailing `/` is removed).
+
+#### Advanced API options (JSON)
+
+The **Advanced API options (JSON)** field is optional. When present, it may contain:
+
+```json
+{
+	"timeout": 20,
+	"connectTimeout": 10,
+	"maxRetries": 2,
+	"retryDelayMs": 250
+}
+```
+
+Guidance:
+
+- Retries are applied to **GET requests only**.
+- Non-idempotent operations (order/renew/change IP/suspend/unsuspend/cancel) are **not retried**.
 
 ### Module options (resources)
 

@@ -23,7 +23,7 @@ class Api
     protected $maxRetries = 2;
     protected $retryDelayMs = 250;
 
-    public function __construct($token, $baseUrl = "", $timeout = 20, $connectTimeout = 10, $maxRetries = 2)
+    public function __construct($token, $baseUrl = "", $timeout = 20, $connectTimeout = 10, $maxRetries = 2, $retryDelayMs = 250)
     {
         $this->token = trim((string) $token);
         if ($baseUrl) {
@@ -33,6 +33,7 @@ class Api
         $this->connectTimeout = max(2, (int) $connectTimeout);
         $this->userAgent = 'SharedLicense HostBill Module/1.0.1';
         $this->maxRetries = max(0, (int) $maxRetries);
+        $this->retryDelayMs = max(50, (int) $retryDelayMs);
     }
 
     public function account()

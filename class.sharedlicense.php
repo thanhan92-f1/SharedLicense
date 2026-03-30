@@ -21,9 +21,9 @@ class SharedLicense extends LicenseModule
         self::CONNECTION_FIELD_IPADDRESS => false,
         self::CONNECTION_FIELD_USERNAME => true,
         self::CONNECTION_FIELD_PASSWORD => false,
-        self::CONNECTION_FIELD_INPUT1 => false,
-        self::CONNECTION_FIELD_INPUT2 => false,
-        self::CONNECTION_FIELD_TEXTAREA => false,
+        self::CONNECTION_FIELD_INPUT1 => true,
+        self::CONNECTION_FIELD_INPUT2 => true,
+        self::CONNECTION_FIELD_TEXTAREA => true,
         self::CONNECTION_FIELD_CHECKBOX => false,
         self::CONNECTION_FIELD_NAMESERVERS => false,
         self::CONNECTION_FIELD_MAXACCOUNTS => false,
@@ -33,6 +33,9 @@ class SharedLicense extends LicenseModule
     protected $serverFieldsDescription = [
         self::CONNECTION_FIELD_HOSTNAME => 'API Base URL',
         self::CONNECTION_FIELD_USERNAME => 'Bearer Token',
+        self::CONNECTION_FIELD_INPUT1 => 'Request timeout (seconds)',
+        self::CONNECTION_FIELD_INPUT2 => 'Connect timeout (seconds)',
+        self::CONNECTION_FIELD_TEXTAREA => 'Advanced API options (JSON)',
     ];
 
     protected $options = [
@@ -124,7 +127,33 @@ class SharedLicense extends LicenseModule
         $this->connect_data = is_array($server) ? $server : [];
         $baseUrl = $this->serverValue(['host', 'hostname'], self::DEFAULT_API_BASE_URL);
         $token = $this->serverValue(['username', 'user', 'token'], '');
-        $this->api = new Hosting\SharedLicense\Api($token, $baseUrl);
+
+        $timeout = (int) $this->serverValue(['input1', 'timeout'], 20);
+        $connectTimeout = (int) $this->serverValue(['input2', 'connect_timeout'], 10);
+
+        $maxRetries = 2;
+        $retryDelayMs = 250;
+
+        $advanced = trim((string) $this->serverValue(['textarea', 'advanced'], ''));
+        if ($advanced !== '') {
+            $decoded = json_decode($advanced, true);
+            if (is_array($decoded)) {
+                if (isset($decoded['timeout'])) {
+                    $timeout = (int) $decoded['timeout'];
+                }
+                if (isset($decoded['connectTimeout'])) {
+                    $connectTimeout = (int) $decoded['connectTimeout'];
+                }
+                if (isset($decoded['maxRetries'])) {
+                    $maxRetries = (int) $decoded['maxRetries'];
+                }
+                if (isset($decoded['retryDelayMs'])) {
+                    $retryDelayMs = (int) $decoded['retryDelayMs'];
+                }
+            }
+        }
+
+        $this->api = new Hosting\SharedLicense\Api($token, $baseUrl, $timeout, $connectTimeout, $maxRetries, $retryDelayMs);
     }
 
     public function Prepare($data)

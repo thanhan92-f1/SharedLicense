@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hardened API client settings (connect timeout + SSL verification).
 - Added GET-only retry with exponential backoff for transient network/HTTP issues.
+- Exposed API tuning via HostBill Server fields (timeouts + advanced JSON).
+- Added GitHub issue templates and PR template.
 
 ## [1.0.0] - 2026-03-30
 

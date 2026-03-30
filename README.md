@@ -272,3 +272,22 @@ Khi gặp lỗi:
 
 - Current module version: `1.0.0` (xem `SharedLicense::$version`).
 
+## License (GPL v3)
+
+Source code trong thư mục `sharedlicense/` được phát hành theo giấy phép:
+
+- **GNU General Public License v3.0 (hoặc mới hơn)** — `GPL-3.0-or-later`
+
+Toàn văn giấy phép nằm tại file `LICENSE`.
+
+### Ghi nhận quyền tác giả
+
+Copyright (C) 2026 **Nguyen Thanh An by Pho Tue SoftWare Solutions JSC**.
+
+Bạn được phép sử dụng/sao chép/sửa đổi/phân phối theo điều khoản của GPL v3 (hoặc mới hơn), nhưng cần **giữ nguyên các thông báo bản quyền và license** theo yêu cầu của GPL.
+
+### Lưu ý về bên thứ ba
+
+- “HostBill” và “SharedLicense” có thể là nhãn hiệu/brand của các bên liên quan; module này không khẳng định bất kỳ quyền sở hữu nhãn hiệu nào.
+
+

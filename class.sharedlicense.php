@@ -11,7 +11,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'class.api.php';
 
 class SharedLicense extends LicenseModule
 {
-    protected $version = '1.0.0';
+    protected $version = '1.0.1';
     protected $_repository = 'hosting_sharedlicense';
     protected $description = 'SharedLicense provisioning module for HostBill.';
     protected $modname = 'SharedLicense';

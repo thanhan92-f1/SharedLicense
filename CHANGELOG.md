@@ -7,12 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-03-30
+
 ### Added
 
 - Enterprise-grade English documentation in `README.md`.
 - GPLv3 licensing files: `LICENSE`, `NOTICE`.
 - SPDX headers across PHP/JS/Smarty templates.
+
+### Changed
+
 - Hardened API client settings (connect timeout + SSL verification).
+- Added GET-only retry with exponential backoff for transient network/HTTP issues.
 
 ## [1.0.0] - 2026-03-30
 

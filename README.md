@@ -23,6 +23,12 @@ Provisioning module for HostBill that integrates with the **SharedLicense Resell
 - [Security notes](#security-notes)
 - [License](#license)
 
+Additional docs:
+
+- `UPGRADE.md` — upgrade procedure and version notes
+- `SECURITY.md` — reporting and threat model
+- `SUPPORT.md` — support scope
+
 ## Compatibility
 
 This module targets a standard HostBill module runtime and avoids non-portable dependencies.
@@ -341,6 +347,8 @@ Only against a non-billable or sandbox product. Ordering may create a billable l
 - Treat the Bearer token as a secret; store it only in HostBill server config.
 - Tokens are not written to logs (masked when debug logging is enabled).
 - Mutating admin actions are protected by HostBill security token validation (`token_valid`).
+
+For a fuller overview, see `SECURITY.md`.
 
 ## License
 

@@ -23,6 +23,21 @@ Provisioning module for HostBill that integrates with the **SharedLicense Resell
 - [Security notes](#security-notes)
 - [License](#license)
 
+## Compatibility
+
+This module targets a standard HostBill module runtime and avoids non-portable dependencies.
+
+- PHP: requires cURL + JSON.
+- UI: uses HostBill admin templates, jQuery and Bootbox (as provided by HostBill).
+
+## Quick start (operator)
+
+1. Enable module in HostBill.
+2. Configure a Server record (API Base URL + Bearer Token).
+3. Assign the module to a product.
+4. Select a SharedLicense `product` option and configure required custom fields (dynamic `sharedlicense_cf_*`).
+5. Use Test Connection; then order using a non-billable product for validation.
+
 ## Key features
 
 - Provisioning actions: **Create / Suspend / Unsuspend / Terminate (Cancel) / Renew**.
@@ -298,6 +313,28 @@ If `HBDebug::debug` is available, the module logs API request/response metadata.
 
 - HostBill-side limit (`max_ip_changes`) has been reached.
 - Admin may use “Reset IP Counter” (local only) if your policy allows.
+
+## FAQ
+
+### Does this module store the Bearer token in the database?
+
+No. The Bearer token is stored in HostBill's server configuration. The module masks it in debug logs.
+
+### Why does the product list not load?
+
+- Check network connectivity and firewall rules.
+- Verify API base URL and token.
+- If API is down but `products.json` exists, the module should fall back to the cache.
+
+### Can I safely test Create?
+
+Only against a non-billable or sandbox product. Ordering may create a billable license.
+
+## Maintainer notes
+
+- Dynamic options are generated per product based on API `customfields`.
+- Extra details are persisted via `Accounts::updateExtraDetails()`.
+- Admin actions are routed via `admin/class.sharedlicense_controller.php`.
 
 ## Security notes
 

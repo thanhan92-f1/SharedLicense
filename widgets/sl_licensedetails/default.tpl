@@ -1,3 +1,8 @@
+{* SharedLicense HostBill Module
+ * Copyright (C) 2026 Nguyen Thanh An by Pho Tue SoftWare Solutions JSC
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *}
+
 {if $license}
     <div class="sharedlicense-widget sharedlicense-widget-details">
         <div class="row" style="margin-bottom: 8px;">

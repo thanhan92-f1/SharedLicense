@@ -1,3 +1,8 @@
+{* SharedLicense HostBill Module
+ * Copyright (C) 2026 Nguyen Thanh An by Pho Tue SoftWare Solutions JSC
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *}
+
 {if $details.status == 'Active' || $details.status == 'Suspended' || $details.status == 'Pending' || $details.status == 'Terminated' || $details.status == 'Cancelled'}
     <ul class="accor">
         <li>

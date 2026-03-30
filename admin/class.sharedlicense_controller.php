@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * SharedLicense HostBill Module (Admin Controller)
+ *
+ * Copyright (C) 2026 Nguyen Thanh An by Pho Tue SoftWare Solutions JSC
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 class SharedLicense_controller extends HBController
 {
     public $module;

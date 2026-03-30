@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * SharedLicense HostBill Module (Widgets)
+ *
+ * Copyright (C) 2026 Nguyen Thanh An by Pho Tue SoftWare Solutions JSC
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 abstract class SharedLicenseWidget extends HostingWidget
 {
     protected $info = ['appendtpl' => 'default.tpl', 'options' => 3];

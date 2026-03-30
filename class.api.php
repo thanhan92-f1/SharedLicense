@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * SharedLicense HostBill Module
+ *
+ * Copyright (C) 2026 Nguyen Thanh An by Pho Tue SoftWare Solutions JSC
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 namespace Hosting\SharedLicense;
 
 class Error extends \Exception
@@ -11,15 +18,18 @@ class Api
     protected $token = "";
     protected $baseUrl = "https://sharedlicense.com/client/modules/addons/LicReseller/api";
     protected $timeout = 20;
+    protected $connectTimeout = 10;
     protected $userAgent = "SharedLicense HostBill Module/1.0";
 
-    public function __construct($token, $baseUrl = "", $timeout = 20)
+    public function __construct($token, $baseUrl = "", $timeout = 20, $connectTimeout = 10)
     {
         $this->token = trim((string) $token);
         if ($baseUrl) {
             $this->baseUrl = rtrim(trim((string) $baseUrl), "/");
         }
         $this->timeout = max(5, (int) $timeout);
+        $this->connectTimeout = max(2, (int) $connectTimeout);
+        $this->userAgent = 'SharedLicense HostBill Module/1.0.0';
     }
 
     public function account()
@@ -122,16 +132,19 @@ class Api
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 3,
+            CURLOPT_CONNECTTIMEOUT => $this->connectTimeout,
             CURLOPT_TIMEOUT => $this->timeout,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_HTTPHEADER => $headers,
             CURLOPT_USERAGENT => $this->userAgent,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
         ];
 
         if ($method !== 'GET') {
-            $body = !empty($payload) ? json_encode($payload) : '{}';
+            $body = !empty($payload) ? json_encode($payload, JSON_UNESCAPED_SLASHES) : '{}';
             if ($body === false) {
                 throw new Error('Failed to encode API request payload', 1);
             }

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * SharedLicense HostBill Module
+ *
+ * Copyright (C) 2026 Nguyen Thanh An by Pho Tue SoftWare Solutions JSC
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'class.api.php';
 
 class SharedLicense extends LicenseModule
@@ -480,7 +487,14 @@ class SharedLicense extends LicenseModule
     protected function cacheProducts(array $response)
     {
         $file = __DIR__ . DIRECTORY_SEPARATOR . 'products.json';
-        @file_put_contents($file, json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        $tmp = $file . '.tmp';
+        $json = json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        if ($json === false) {
+            return;
+        }
+        if (@file_put_contents($tmp, $json) !== false) {
+            @rename($tmp, $file);
+        }
     }
 
     protected function buildOrderPayload(array $product)

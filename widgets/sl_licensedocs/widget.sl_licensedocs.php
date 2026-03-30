@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * SharedLicense HostBill Module (Client Widget: License Docs)
+ *
+ * Copyright (C) 2026 Nguyen Thanh An by Pho Tue SoftWare Solutions JSC
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'class.sharedlicense_widget.php';
 
 class Widget_sl_licensedocs extends SharedLicenseWidget
